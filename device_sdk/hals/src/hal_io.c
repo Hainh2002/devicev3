@@ -9,10 +9,10 @@
 #include <stdlib.h>
 
 hal_io_t* hal_io_init(hal_io_proc_t *_proc, void* _handle){
-    static hal_io_t _this;
-    _this.m_proc = _proc;
-    _this.m_handle = _handle;
-    return &_this;
+    hal_io_t* _this = malloc(sizeof(hal_io_t));
+    _this->m_proc = _proc;
+    _this->m_handle = _handle;
+    return _this;
 }
 
 void hal_io_deinit(hal_io_t *_this){

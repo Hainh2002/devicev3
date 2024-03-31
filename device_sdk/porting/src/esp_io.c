@@ -19,14 +19,14 @@ static int32_t gpio_open(hal_io_t *_this, uint8_t _port, uint8_t _pin, uint8_t _
     _this->m_port = _port;
     _this->m_pin = _pin;
     _this->m_mode = _mode;
+    gpio_set_direction((gpio_num_t)_pin, GPIO_MODE_INPUT_OUTPUT);
+    // _impl(_this->m_handle)->intr_type = GPIO_INTR_DISABLE;
+    // _impl(_this->m_handle)->mode    = GPIO_MODE_INPUT_OUTPUT;
+    // _impl(_this->m_handle)->pin_bit_mask = 1ULL << (gpio_num_t)_pin;
+    // _impl(_this->m_handle)->pull_down_en = 0;
+    // _impl(_this->m_handle)->pull_up_en = 0;
 
-    _impl(_this->m_handle)->intr_type = GPIO_INTR_DISABLE;
-    _impl(_this->m_handle)->mode    = GPIO_MODE_INPUT_OUTPUT;
-    _impl(_this->m_handle)->pin_bit_mask = 1ULL << (gpio_num_t)_pin;
-    _impl(_this->m_handle)->pull_down_en = 0;
-    _impl(_this->m_handle)->pull_up_en = 0;
-
-    gpio_config(_impl(_this->m_handle));
+    // gpio_config(_impl(_this->m_handle));
     
 	return 0;
 }

@@ -128,6 +128,13 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# esp32-tm1637 Example Configuration
+#
+CONFIG_TM1637_CLK_PIN=8
+CONFIG_TM1637_DIO_PIN=9
+# end of esp32-tm1637 Example Configuration
+
+#
 # Compiler options
 #
 CONFIG_COMPILER_OPTIMIZATION_DEFAULT=y
