@@ -1,9 +1,9 @@
 /**
- * Create by hainh2002 
- * 
- * hal_flash.h 
- * 
-*/
+ *  Create by hainh2002
+ *
+ *  email: hai.nh200802@gmail.com
+ *
+ */
 #ifndef HAL_INCLUDE_HAL_FLASH_H_
 #define HAL_INCLUDE_HAL_FLASH_H_
 
@@ -116,4 +116,4 @@ static inline int32_t hal_flash_close(hal_flash_t *_this)
     return _this->proc->close (_this);
 }
 
-#endif /* hal_INCLUDE_HAL_FLASH_H_ */
+#endif /* HAL_INCLUDE_HAL_FLASH_H_ */

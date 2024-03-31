@@ -1,12 +1,11 @@
 /**
- * Create by hainh2002 
- * 
- * hal_io.h 
- * 
-*/
-
-#ifndef HAL_IO_H
-#define HAL_IO_H
+ *  Create by hainh2002
+ *
+ *  email: hai.nh200802@gmail.com
+ *
+ */
+#ifndef HAL_INCLUDE_HAL_IO_H
+#define HAL_INCLUDE_HAL_IO_H
 #include <stdint.h>
 /**
  * @enum

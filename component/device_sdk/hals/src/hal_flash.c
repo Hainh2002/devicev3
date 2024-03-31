@@ -1,9 +1,9 @@
 /**
- * Create by hainh2002 
- * 
- * hal_flash.c 
- * 
-*/
+ *  Create by hainh2002
+ *
+ *  email: hai.nh200802@gmail.com
+ *
+ */
 #include "hal_flash.h"
 #include <stdio.h>
 #include <stdlib.h>

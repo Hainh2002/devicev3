@@ -1,18 +1,18 @@
 /**
- * Create by hainh2002 
- * 
- * hal_io.c 
- * 
-*/
+ *  Create by hainh2002
+ *
+ *  email: hai.nh200802@gmail.com
+ *
+ */
 #include "hal_io.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 hal_io_t* hal_io_init(hal_io_proc_t *_proc, void* _handle){
-    hal_io_t *_this = malloc(sizeof(hal_io_t));
-    _this->m_proc = _proc;
-    _this->m_handle = _handle;
-    return _this;
+    static hal_io_t _this;
+    _this.m_proc = _proc;
+    _this.m_handle = _handle;
+    return &_this;
 }
 
 void hal_io_deinit(hal_io_t *_this){

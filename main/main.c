@@ -1,27 +1,31 @@
+/**
+ *  Create by hainh2002
+ *
+ *  email: hai.nh200802@gmail.com
+ *
+ */
 #include <stdio.h>
-#include "driver/gpio.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "freertos/queue.h"
-#include "esp_log.h"
+#include"driver/gpio.h"
+#include"freertos/FreeRTOS.h"
+#include"freertos/task.h"
+#include"freertos/queue.h"
+#include"esp_log.h"
+#include"porting.h"
 
 void app_main(void)
 {
-    gpio_config_t io_conf = {
-    .mode = GPIO_MODE_INPUT_OUTPUT,
-    .pull_down_en = 0,
-    .pull_up_en = 0,
-    .intr_type = GPIO_INTR_DISABLE,
-    .pin_bit_mask = 1ULL << GPIO_NUM_8
-    };
+    gpio_config_t g_io;
 
-    gpio_config(&io_conf);
+    hal_io_t* led_pin = hal_io_init(&io_func, &g_io);
+    hal_io_open(led_pin, 0, PIN_8, GPIO_MODE_INPUT_OUTPUT);
+
     while(1){
-        gpio_set_level(GPIO_NUM_8,0);
-        vTaskDelay(1000/portTICK_RATE_MS);
+        hal_io_set_value(led_pin, 0);
+        vTaskDelay(500/portTICK_RATE_MS);
         ESP_LOGI("main", "PIN 8 ON\n");
-        gpio_set_level(GPIO_NUM_8,1);
-        vTaskDelay(1000/portTICK_RATE_MS);
+
+        hal_io_set_value(led_pin, 1);
+        vTaskDelay(500/portTICK_RATE_MS);
         ESP_LOGI("main", "PIN 8 OFF\n");        
     }
     
