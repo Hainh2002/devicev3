@@ -1,4 +1,4 @@
-menu "esp32-tm1637 Example Configuration"
+menu "TM1637 Configuration"
 
     config TM1637_CLK_PIN
         int "TM1637 lcd CLK pin GPIO number"
