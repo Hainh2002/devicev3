@@ -5,7 +5,7 @@ set(srcs
 set(incs hx711/.
         tm1637/.)
         
-set(reqs log mbedtls driver libs)
+set(reqs log mbedtls driver libs esp_timer)
 
 idf_component_register(SRCS ${srcs}
                        INCLUDE_DIRS ${incs}

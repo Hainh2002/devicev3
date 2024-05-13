@@ -4,6 +4,7 @@
 #include<stdint.h>
 #include<stdlib.h>
 #include"hx711.h"
+#include"sv_btn.h"
 #include"config.h"
 
 
@@ -21,9 +22,11 @@ typedef struct lc_event_cb_fn {
 
 typedef struct {
     hx711_t             *m_adc;
+    sv_btn_t            *m_btn;
     int32_t             m_mass;
     int32_t             m_calib_val;
     int32_t             m_offset_val;
+    uint8_t				m_is_tared;
     uint8_t             m_state;
     lc_event_cb_fn_t    *cb_fn;
     void*               event_arg;   
