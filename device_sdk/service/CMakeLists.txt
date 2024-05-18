@@ -12,7 +12,7 @@ set(incs
 
 set(reqs 
     drivers core utils
-    driver log nvs_flash mqtt esp_wifi esp_netif)
+    driver log nvs_flash mqtt esp_wifi esp_netif json)
 
 idf_component_register(SRCS ${srcs}
                        INCLUDE_DIRS ${incs}

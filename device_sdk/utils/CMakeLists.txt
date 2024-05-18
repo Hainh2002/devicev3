@@ -1,8 +1,9 @@
 set(srcs
-	cJSON/.)
+#	cJSON/.
+	)
 
 set(incs 
-	cJSON/.
+#	cJSON/.
 	/.)
 
 idf_component_register(SRCS ${srcs}

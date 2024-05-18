@@ -8,9 +8,10 @@
 
 #include "tm1637.h"
 #include "sm_elapsed_timer.h"
+#include "sv_btn.h"
 
 #define DISPLAY_ON_SLEEP_MODE				(0)
-#define DISPLAY_ON_SCREEN_TIME_MAX			(5*60*1000)
+#define DISPLAY_ON_SCREEN_TIME_MAX			(25*1000)
 #define DISPLAY_BLINK_TIME					(500)
 #define DISPLAY_REFR_CYCLE					(100)
 /*			 _a_
@@ -23,14 +24,15 @@ typedef enum {  // XGFE DCBA
 	CHAR_0 = 0x3f, CHAR_1 = 0x06, CHAR_2 = 0x5b, CHAR_3 = 0x4f, CHAR_4 = 0x66,
 	CHAR_5 = 0x6d, CHAR_6 = 0x7d, CHAR_7 = 0x07, CHAR_8 = 0x7f,	CHAR_9 = 0x6f,
 	CHAR_A = 0x77, CHAR_b = 0x7c, CHAR_C = 0x39, CHAR_c = 0x59,	CHAR_d = 0x5e,
-	CHAR_E = 0x79, CHAR_F = 0x71, CHAR_H = 0x76, CHAR_h = 0x74,	CHAR_O = 0x3f,
+	CHAR_E = 0x79, CHAR_F = 0x71, CHAR_H = 0x76, CHAR_h = 0x74,	CHAR_N = 0x37,
 	CHAR_o = 0x5c, CHAR_I = 0x06, CHAR_i = 0x04, CHAR_L = 0x38, CHAR_NEG = 0x40,
 
 	CHAR_NULL = 0x00,
 } CHARACTER_t;
 
 enum {
-	DP_NORMAL,
+	DP_OFF,
+	DP_ON,
 	DP_ON_BLINK,
 	DP_ON_SCROLL,
 };
@@ -47,6 +49,7 @@ typedef struct sv_dp {
 	uint8_t         m_brightness;
 	CHARACTER_t		m_seg[4];
 	elapsed_timer_t m_blink_timeout;
+	elapsed_timer_t m_on_src_timeout;
 }sv_dp_t;
 
 sv_dp_t* sv_dp_create(gpio_num_t _pin_data, gpio_num_t _pin_clk);
@@ -62,7 +65,24 @@ void sv_dp_raw_all(sv_dp_t* _this,
 void sv_dp_blink_on(sv_dp_t* _this);
 void sv_dp_blink_off(sv_dp_t* _this);
 void sv_dp_set_brightness(sv_dp_t* _this, uint8_t _level);
-static inline void dp_clear_screen(sv_dp_t* _this){
+static inline void sv_dp_clear_screen(sv_dp_t* _this){
 	sv_dp_raw_all(_this, CHAR_NULL, CHAR_NULL, CHAR_NULL, CHAR_NULL);
 }
+
+static inline void sv_dp_btn_event_cb(sv_dp_t* _this, uint8_t _event){
+	 switch (_event) {
+	        case SV_BTN_TAP:
+	        	if (_this->m_state == DP_OFF)
+	        		_this->m_state = DP_ON;
+	            break;
+	        case SV_BTN_HOLD:
+	        	if (_this->m_state == DP_ON)
+	        	{
+	        		_this->m_state = DP_OFF;
+	        		sv_dp_clear_screen(_this);
+	        	}
+	            break;
+	    }
+}
+void sv_dp_draw_loading(sv_dp_t* _this);
 #endif //SV_DISPLAY_H

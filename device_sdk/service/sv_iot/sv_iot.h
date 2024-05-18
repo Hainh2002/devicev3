@@ -14,7 +14,7 @@
 #include "freertos/task.h"
 #include "freertos/semphr.h"
 #include "freertos/queue.h"
-
+#include "esp_smartconfig.h"
 
 #include "lwip/sockets.h"
 #include "lwip/dns.h"
@@ -75,6 +75,7 @@ typedef struct sv_iot {
     mqtt_client_t              	*m_mqtt;
     sv_iot_event_cb_t          	*m_cb;
     void                        *m_event_arg;
+    uint8_t 					m_denied;
 }sv_iot_t;
 
 
